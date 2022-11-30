@@ -31,6 +31,7 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <limits.h>
+#include <signal.h>
 #include "tiffio.h"
 
 #define SH_MEM_AMT 60000000
@@ -105,6 +106,8 @@ int main(int argc, char *argv[])
 
 void Frame()
 {
+  pid_t pid = 55231;
+  kill(pid,SIGUSR1);
   long starttime,stoptime,exectime,i;
 
   Init_Options();
@@ -221,7 +224,7 @@ void Frame()
 #endif
 
   Global->Index = NODE0;
-
+ 
   printf("\nRendering...\n");
   printf("node\tframe\ttime\titime\trays\thrays\tsamples trilirped\n");
 
@@ -232,6 +235,7 @@ void Frame()
 
 void Render_Loop()
 {
+
   long step,i;
   PIXEL *local_image_address;
   MPIXEL *local_mask_image_address;
